@@ -50,7 +50,7 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView sportText;
     public DrawerLayout drawerLayout;
     private Button navButton;{}
-    private ImageView bingPicImg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class WeatherActivity extends AppCompatActivity {
         sportText = findViewById(R.id.sport_text);
         drawerLayout = findViewById(R.id.drawer_layout);
         navButton = findViewById(R.id.nav_button);
-        bingPicImg = findViewById(R.id.background_pic);
+
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,12 +97,7 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
 
-        String bingpic = pres.getString("picture", null);
-        if (bingpic != null) {
-            Glide.with(this).load(bingpic).into(bingPicImg);
-        } else {
-            loadBackground();
-        }
+
 
 
     }
@@ -122,7 +117,7 @@ public class WeatherActivity extends AppCompatActivity {
                         swipeRefresh.setRefreshing(false);
                     }
                 });
-                loadBackground();
+
             }
 
 
@@ -150,29 +145,8 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
-    private void loadBackground() {
-        String requestBingPic = "http://guolin.tech/api/bing_pic";
-        HttpUtil.sendOkHttpRequest(requestBingPic, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String bingPic = response.body().string();
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
-                editor.putString("bing_pic", bingPic);
-                editor.apply();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Glide.with(WeatherActivity.this).load(bingPic).into(bingPicImg);
-                    }
-                });
-            }
-        });
-    }
+
     private void showWeatherInfo(Weather weatherlx) {
         String cityName = weatherlx.basic.cityName;
         String updatetime = weatherlx.basic.update.updateTime.split("")[1];
