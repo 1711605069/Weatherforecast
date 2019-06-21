@@ -3,6 +3,8 @@ package com.example.weatherforecast;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,7 +12,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,10 +94,18 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestWeather(mWeatherId);
+               // requestWeather(mWeatherId);
+               new Handler().postAtTime(new Runnable() {
+                   @Override
+                   public void run() {
+                        Toast.makeText(WeatherActivity.this,"更新成功",Toast.LENGTH_LONG).show();
+                       swipeRefresh.setRefreshing(false);
+                   }
+               },1000);
+//
             }
         });
-
+        runnable.run();
 
 
 
@@ -135,7 +144,7 @@ public class WeatherActivity extends AppCompatActivity {
                             mWeatherId=weather.basic.weatherId;
                             showWeatherInfo(weather);
                         } else {
-                            Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(WeatherActivity.this, "获取天气信息失败!请向右滑选择城市", Toast.LENGTH_SHORT).show();
                         }
                         swipeRefresh.setRefreshing(false);
                     }
@@ -143,10 +152,6 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
     private void showWeatherInfo(Weather weatherlx) {
         String cityName = weatherlx.basic.cityName;
         String updatetime = weatherlx.basic.update.updateTime.split("")[1];
@@ -180,5 +185,27 @@ public class WeatherActivity extends AppCompatActivity {
         sportText.setText(sport);
         weatherLyout.setVisibility(View.VISIBLE);
 
+    }
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            requestWeather(mWeatherId);
+            handler.postDelayed(this,120000);
+        }
+    };
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            return false;
+        }
+    });
+
+    @Override
+    protected void onDestroy() {
+        if (handler!=null){
+            handler.removeCallbacks(runnable);
+        }
+        super.onDestroy();
     }
 }
