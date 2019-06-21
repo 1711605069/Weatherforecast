@@ -1,5 +1,4 @@
 package com.example.weatherforecast.util;
-
 import android.text.TextUtils;
 
 import com.example.weatherforecast.dp.City;
@@ -11,7 +10,6 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 public class Utility {
     public static boolean handleProvinceResponse(String response) {
         if (!TextUtils.isEmpty(response)) {
@@ -31,8 +29,6 @@ public class Utility {
         }
         return false;
     }
-
-
     public static boolean handleCityResponse(String response, int provinceId) {
         if (!TextUtils.isEmpty(response)) {
             try {
@@ -52,8 +48,6 @@ public class Utility {
         }
         return false;
     }
-
-
     public static boolean handleCountyResponse(String response, int cityId) {
         if (!TextUtils.isEmpty(response)) {
             try {

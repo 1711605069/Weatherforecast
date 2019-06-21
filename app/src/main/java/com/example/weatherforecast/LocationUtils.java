@@ -33,20 +33,20 @@ public class LocationUtils {
         criteria.setCostAllowed(false);      //不允许产生资费
         criteria.setPowerRequirement(Criteria.POWER_LOW);   //低功耗
 
-        //通过最后一次的地理位置来获取Location对象
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        String queryed_name = updateWithNewLocation(location);
-        if((queryed_name!=null)&&(0!=queryed_name.length())){
-            cityName = queryed_name;
-        }
-		/*
-		第二个参数表示更新的周期，单位为毫秒，
-		第三个参数的含义表示最小距离间隔，单位是米，设定每30秒进行一次自动定位
-		*/
-        locationManager.requestLocationUpdates(provider, 30000, 50, locationListener);
-        //移除监听器，在只有一个widget的时候，这个还是适用的
-        locationManager.removeUpdates(locationListener);
+//        //通过最后一次的地理位置来获取Location对象
+//        Location location = locationManager.getLastKnownLocation(provider);
+//
+//        String queryed_name = updateWithNewLocation(location);
+//        if((queryed_name!=null)&&(0!=queryed_name.length())){
+//            cityName = queryed_name;
+//        }
+//		/*
+//		第二个参数表示更新的周期，单位为毫秒，
+//		第三个参数的含义表示最小距离间隔，单位是米，设定每30秒进行一次自动定位
+//		*/
+//        locationManager.requestLocationUpdates(provider, 30000, 50, locationListener);
+//        //移除监听器，在只有一个widget的时候，这个还是适用的
+//        locationManager.removeUpdates(locationListener);
     }
     //方位改变是触发，进行调用
     private final static LocationListener locationListener = new LocationListener() {
