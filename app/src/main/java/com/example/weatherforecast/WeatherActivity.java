@@ -2,6 +2,7 @@ package com.example.weatherforecast;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +39,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class WeatherActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class WeatherActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //增加下拉刷新控件
     private SwipeRefreshLayout swipeRefresh;
     private String mWeatherId;
@@ -48,6 +51,8 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
     private TextView et_user_name;
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
+
+    private AlertDialog mDialog;
 
     private ScrollView weatherLyout;
     private TextView titltCity;
@@ -87,13 +92,12 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
         navButton = findViewById(R.id.nav_button);
 
 
-
         btnmore = findViewById(R.id.btn_more);
         btnmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.END);
-                collapsingToolbarLayout =  findViewById(R.id.collapsing_tool_bar);
+                collapsingToolbarLayout = findViewById(R.id.collapsing_tool_bar);
                 collapsingToolbarLayout.setTitle("无登陆");
             }
         });
@@ -108,7 +112,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
             }
         });
 
-
+        initDialog();
 
         swipeRefresh = findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -145,14 +149,11 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
 
 
 
-
-
-
-
-public void circle_onclick(View view){
-        Intent intent=new Intent(WeatherActivity.this,LoginActivity.class);
+    public void circle_onclick(View view) {
+        Intent intent = new Intent(WeatherActivity.this, LoginActivity.class);
         startActivityForResult(intent, 1);
-}
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -270,10 +271,12 @@ public void circle_onclick(View view){
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id=menuItem.getItemId();
-        if (id==R.id.circle_image){
-            Intent intent2=new Intent(WeatherActivity.this, LoginActivity.class);
+        int id = menuItem.getItemId();
+        if (id == R.id.nav_pay) {
+            Intent intent2 = new Intent(WeatherActivity.this, PayActivity.class);
             startActivity(intent2);
+        } else if (id == R.id.nav_exit) {
+            finish();
         }
 
         return true;

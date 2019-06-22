@@ -34,7 +34,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
-        android:background="@drawable/more"
+        android:background="@drawable/me"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"/>
 
