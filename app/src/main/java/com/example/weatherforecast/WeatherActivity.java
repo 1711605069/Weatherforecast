@@ -146,7 +146,34 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
     }
 
 
+    //初始化Dialog
+    private void initDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //方法类方法，带Builder的方式类都可以用方法链的写法
+        builder.setTitle("标题").setIcon(R.drawable.question).setMessage("是否退出")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    //确定按纽退出App
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNegativeButton("取消", null);
+        //创建Dia对象
+        mDialog = builder.create();
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if (!mDialog.isShowing()) {
+                    mDialog.show();
+                } else {
+                    mDialog.dismiss();
+                }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
     public void circle_onclick(View view) {
