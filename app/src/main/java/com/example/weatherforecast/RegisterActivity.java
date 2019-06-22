@@ -27,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btn_register = (Button) findViewById(R.id.btn_register);
         et_user_name = (EditText) findViewById(R.id.et_user_name);
         et_psw = (EditText) findViewById(R.id.et_psw);
-        iv_show_psw = (ImageView) findViewById(R.id.iv_show_psw);
         btn_register.setOnClickListener(this);
     }
 

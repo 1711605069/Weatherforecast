@@ -98,7 +98,7 @@ public class WeatherActivity extends AppCompatActivity implements NavigationView
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.END);
                 collapsingToolbarLayout = findViewById(R.id.collapsing_tool_bar);
-                collapsingToolbarLayout.setTitle("无登陆");
+                collapsingToolbarLayout.setTitle("未登陆");
             }
         });
 

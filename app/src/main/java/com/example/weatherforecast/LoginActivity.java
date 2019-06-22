@@ -30,7 +30,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initView(){
         et_user_name= (EditText) findViewById(R.id.et_user_name);
         et_psw= (EditText) findViewById(R.id.et_psw);
-        iv_show_psw= (ImageView) findViewById(R.id.iv_show_psw);
         tv_quick_register=(TextView)findViewById(R.id.tv_quick_register);
         tv_forget_psw=(TextView)findViewById(R.id.tv_forget_psw);
         btn_login=(Button)findViewById(R.id.btn_login);
