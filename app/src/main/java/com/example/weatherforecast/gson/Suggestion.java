@@ -10,7 +10,11 @@ public class Suggestion {
     @SerializedName("cw")
     public CarWash carWash;
 
+    @SerializedName("sport")
     public Sport sport;
+
+    @SerializedName("flu")
+    public Fluent fluent;
 
     public class Comfort {
 
@@ -26,11 +30,19 @@ public class Suggestion {
 
     }
 
+
     public class Sport {
 
         @SerializedName("txt")
         public String info;
 
     }
+    public class Fluent {
+
+        @SerializedName("txt")
+        public String info;
+
+    }
+
 
 }
